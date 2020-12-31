@@ -6,12 +6,12 @@
                 <v-card-title class="d-flex flex-column align-center justify-center"><v-icon size="100" color="white">mdi-wechat</v-icon>
                 <p class="title-font">Chat It!!!</p></v-card-title>
                
-                <v-form class="mt-2">
-                    <v-text-field label="Enter Display Name" solo ></v-text-field>
+                <v-form class="mt-2" ref="form">
+                    <v-text-field label="Enter Display Name" solo :rules="inputRules['nameField']" class="error-class" ></v-text-field>
                     <v-text-field label="Enter Room ID" solo ></v-text-field>
-                    <v-content class="d-flex flex-column align-center justify-center">
+                    <v-main class="d-flex flex-column align-center justify-center">
                     <v-btn depressed  elevation="3" class="green accent-4 white--text mb-4">Join Chat</v-btn>
-                    </v-content>
+                    </v-main>
                 </v-form>
                 </v-card>
                 
@@ -22,7 +22,14 @@
 </template>
 <script>
 export default {
-    name:'JoinGroup'
+    name:'JoinGroup',
+    data(){
+        return {
+            inputRules: {
+                nameField : [inputLength => inputLength.length >=4 || 'Minimum length is 3 characters']
+            }
+        }
+    }
 }
 </script>
 <style scoped>
@@ -39,5 +46,14 @@ export default {
 .title-font{
     font-family: 'Redressed';
     font-size:80px;
+}
+.error-class.error--text,
+.error-class .error--text {
+    color:rgb(0, 0, 0) !important;
+    caret-color: rgb(0, 0, 0) !important;
+}
+div.v-messages.theme--light.error--text{
+    color:rgb(0, 0, 0) !important;
+    caret-color: rgb(0, 0, 0) !important;
 }
 </style>
