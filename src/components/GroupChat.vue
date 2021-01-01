@@ -57,10 +57,12 @@ export default {
             return false
       },
       sendData(){
+        if(this.messageText.length>0){
           let data = { user:this.currentUser,title:'hello',content:this.messageText}
           this.messages.push(data)
           this.$refs.form.reset()
           this.$refs.scrollerMain.scrollTop= this.$refs.scrollerMain.scrollHeight
+        }
       }
     },
 }
