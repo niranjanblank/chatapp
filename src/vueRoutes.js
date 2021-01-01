@@ -13,11 +13,20 @@ const routes = [
   },
   {
     path: '/group',
-    name: 'Group',
+    name: 'GroupChat',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: GroupChat
+    component: GroupChat,
+    props: true,
+    beforeEnter: (to,from,next)=>{
+        if(to.params.currentUser && to.params.roomId) {
+          next()
+        }
+        else{
+          next({name:'JoinGroup'})
+        }
+    }
   },
 
 ]

@@ -1,6 +1,6 @@
 <template>
     <v-app class="blue lighten-5">
-        <navbar/>
+        <navbar :currentUser="currentUser" :roomId="roomId" :participants="currentParticipants"/>
        <v-main v-chat-scroll class="height-style overflow-y-auto" v-scroll.self="onScroll" ref="scrollerMain">
             <v-list class="blue lighten-5"> 
                <v-list-item v-for="(message,index) in messages" :key="index" class=" d-flex" 
@@ -30,8 +30,8 @@ import messages from './messages'
 export default {
     name:'GroupChat',
     components: {
-    navbar, messages
-  },
+    navbar, messages },
+    props: ['currentUser','roomId'],
   data(){
       return{
           scrollInvoked: 0,
@@ -41,11 +41,11 @@ export default {
             //   {user:'Bedh Shah',title:'Heldo', content:'World'},
             //   {user:'Soduko Shah',title:'Lorem',content:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'}
           ],
-          currentUser: 'Niranjan Shah',
-          messageText:""
+          messageText:"",
+          currentParticipants:[]
       }
   },
-    methods: {
+  methods: {
       onScroll () {
         this.scrollInvoked++
       },
@@ -58,13 +58,36 @@ export default {
       },
       sendData(){
         if(this.messageText.length>0){
-          let data = { user:this.currentUser,title:'hello',content:this.messageText}
-          this.messages.push(data)
+          let data = { user:this.currentUser,content:this.messageText}
+          // this.messages.push(data)
           this.$refs.form.reset()
-          this.$refs.scrollerMain.scrollTop= this.$refs.scrollerMain.scrollHeight
+    
+          console.log(this.roomId)
+
+          //send message to server
+          this.$socket.emit('chatMessage',data)
         }
       }
     },
+  sockets: {
+    connect: function () {
+            this.$socket.broadcast.emit('connectionMessage',)
+        },
+        // receive message from server
+      message: function(data) {
+        // console.log(data) message data containing username and message
+        this.messages.push(data)
+      },
+      updateConnectedUsers: function(data){
+        console.log(data)
+         this.currentParticipants = data
+        //  console.log(this.currentParticipants)
+      }
+      //receive message of who connected to socket
+      // connectionMessage: function(data){
+      //   console.log(`${data} has been connected`)
+      // }
+  }
 }
 </script>
 <style scoped>

@@ -20,23 +20,23 @@
         <v-layout column align-center>
                <v-flex class="mt-5 d-flex justify-center align-center" >
                        <v-avatar color="teal" size="80" >
-                <span class="white--text headline">{{getShortName(name)}}</span>
+                <span class="white--text headline">{{getShortName(currentUser)}}</span>
                      </v-avatar>
                  
                 </v-flex>
                  
-                   <p class="white--text subheading mt-1 h3">{{name}}</p>
+                   <p class="white--text subheading mt-1 h3">{{currentUser}}</p>
            </v-layout>
         <v-divider></v-divider>
-        <v-flex class="mt-5 mb-5"><v-icon color="white" class="ml-4 mr-2">mdi-google-classroom</v-icon> {{roomName}}</v-flex>
+        <v-flex class="mt-5 mb-5"><v-icon color="white" class="ml-4 mr-2">mdi-google-classroom</v-icon> {{roomId}}</v-flex>
         <v-divider></v-divider>
         <v-flex class="mt-2 h1"><v-icon color="white" class="ml-4 mr-2">mdi-account-multiple</v-icon> Participants</v-flex>
             <v-list>
                 <v-list-item v-for="(participant,index) in participants" :key="index">
                     <v-avatar color="red mr-3 ml-4" size="35" >
-                    <span class="white--text headline" ><h5 class="">{{getShortName(participant)}}</h5></span>
+                    <span class="white--text headline" ><h5 class="">{{getShortName(participant.user_name)}}</h5></span>
                      </v-avatar>
-                    <v-list-item-title class="white--text"> {{participant}}</v-list-item-title>
+                    <v-list-item-title class="white--text">{{participant.user_name}}</v-list-item-title>
                 </v-list-item>
             </v-list>
     </v-navigation-drawer>
@@ -49,14 +49,13 @@
 <script>
 export default {
     name:'navbar',
+    props:['currentUser','roomId','participants'],
     data(){
         return {
             drawer: false,
             group: null,
             color: 'blue lighten-5',
-            roomName: 'Some Room',
-            name: 'Niranjan Shah',
-            participants: ['Niranjan Shah','Rabin Shrestha', 'Selena Gomez']
+            
             
         }
     },
