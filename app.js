@@ -18,7 +18,18 @@ io.on('connection', socket=>{
 
     //sending socketId
     socket.emit('sendSocketId',socket.id)
+    
+    
+    //join room
+    socket.on('joinRoom',(data)=>{
+        socket.join(data.roomId)
+        
+        //broadcast to all other users that a new user have joined
+        socket.broadcast.to(data.roomId).emit('newUser',data.user)
 
+        //welcome new user
+        socket.emit('welcomeNewUser',data)
+    })
     //receive newConnected Information and add to connected_user
     socket.on('connectedUser',(data)=>{
         connected_user.push(data)
@@ -31,7 +42,8 @@ io.on('connection', socket=>{
     //listen for the chatMessages
     socket.on('chatMessage',(msgData)=>{
         //send the message data to everyone conneced to server i.e. all clients
-        io.emit('message',msgData)
+        io.to(msgData.roomId).emit('message',msgData)
+        console.log(msgData)
     })
 
     //listen for connected users

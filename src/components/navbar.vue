@@ -55,8 +55,6 @@ export default {
             drawer: false,
             group: null,
             color: 'blue lighten-5',
-            
-            
         }
     },
     methods:{

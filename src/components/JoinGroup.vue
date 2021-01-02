@@ -30,7 +30,8 @@ export default {
             },
             userName: "",
             roomId:"",
-            socketId:""
+            socketId:"",
+          
         }
     },
      sockets: {
@@ -53,11 +54,14 @@ export default {
                 // let room = this.roomId
                 //join chatroom
                 // this.$socket.emit('joinRoom',{username,room})
-                this.$socket.emit('connectedUser',{socket_id: this.socketId,user_name:this.userName})
+                this.$socket.emit('connectedUser',{socket_id: this.socketId,user_name:this.userName,roomId:this.roomId})
+                
+                
             }
         },
     
-    }
+    },
+    
 }
 </script>
 <style scoped>
