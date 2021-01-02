@@ -25,7 +25,7 @@
             <v-list class="blue lighten-5"> 
                <v-list-item v-for="(message,index) in messages" :key="index" class=" d-flex" 
                :class="[checkUsername(message.user)?'justify-end':'']"> 
-           <messages :message="message"></messages>
+           <messages :message="message" :currentUser="currentUser"></messages>
                </v-list-item>
            </v-list> 
            <div id="messageLive">
@@ -47,6 +47,7 @@
 <script>
 import navbar from './navbar'
 import messages from './messages'
+import moment from 'moment'
 export default {
     name:'GroupChat',
     components: {
@@ -81,12 +82,12 @@ export default {
       },
       sendData(){
         if(this.messageText.length>0){
-          let data = { user:this.currentUser,content:this.messageText,roomId:this.roomId}
+          let data = { user:this.currentUser,content:this.messageText,roomId:this.roomId,time:moment().format('LT')}
           // this.messages.push(data)
           this.$refs.form.reset()
     
           console.log(data)
-
+          // console.log(`Time: ${moment().format('LT')}`)
           //send message to server
           this.$socket.emit('chatMessage',data)
         }
