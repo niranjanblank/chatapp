@@ -1,5 +1,25 @@
 <template>
     <v-app class="blue lighten-5">
+      <!-- Snackbar -->
+         <v-snackbar
+      v-model="snackbar"
+      top
+    >
+      {{snackbarText}}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="pink"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+
+      <!--  -->
         <navbar :currentUser="currentUser" :roomId="roomId" :participants="roomParticipants"/>
        <v-main v-chat-scroll class="height-style overflow-y-auto" v-scroll.self="onScroll" ref="scrollerMain">
             <v-list class="blue lighten-5"> 
@@ -43,7 +63,9 @@ export default {
           ],
           messageText:"",
           currentParticipants:[],
-            roomParticipants:[]
+            roomParticipants:[],
+            snackbar: false,
+            snackbarText:""
       }
   },
   methods: {
@@ -91,10 +113,20 @@ export default {
       newUser: function(data_newUser){
         //notify other user that new user has joined
         console.log(data_newUser)
+        this.snackbar= true
+        this.snackbarText=`${data_newUser} has joined `
       },
       welcomeNewUser: function(data){
         //welcome new user
+        
         console.log(`welcome ${data.user}`)
+        this.snackbar= true
+        this.snackbarText=`Welcome ${data.user} `
+      },
+      userleft : function(data){
+        //notifies all other user when someone has left
+          this.snackbar= true
+        this.snackbarText=` ${data} has left `
       }
       //receive message of who connected to socket
       // connectionMessage: function(data){

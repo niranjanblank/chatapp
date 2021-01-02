@@ -51,12 +51,25 @@ io.on('connection', socket=>{
 
     //socket on disconnecting
     socket.on('disconnect',()=>{
+
+        let user_info = connected_user.filter((element)=>{
+            return element.socket_id == socket.id
+        })[0]
+        
+        //notication when someone has left the room
+        try{
+        io.to(user_info.roomId).emit('userleft',user_info.user_name)
+         }
+         catch(err){
+
+         }
+         finally{
        let filtered_list = connected_user.filter((element)=>{
             return element.socket_id != socket.id
         })
         connected_user = filtered_list
         io.emit('updateConnectedUsers',filtered_list)
-        
+    }
     })
 })
 http.listen(3000, ()=>{
