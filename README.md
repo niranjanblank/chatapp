@@ -1,7 +1,7 @@
 # chatapp
 
 
-![]https://github.com/niranjanblank/chatapp/blob/master/images/landing_page.PNG
+![](https://github.com/niranjanblank/chatapp/blob/master/images/landing_page.PNG)
 ## Project setup
 ```
 npm install
