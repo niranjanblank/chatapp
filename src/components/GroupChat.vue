@@ -57,11 +57,8 @@ export default {
       return{
           scrollInvoked: 0,
           messages: [
-            //   {user:'Niranjan Shah',title:'Hello', content:'World'},
-            //   {user:'Rabin Shrestha',title:'Hesd', content:'World'},
-            //   {user:'Bedh Shah',title:'Heldo', content:'World'},
-            //   {user:'Soduko Shah',title:'Lorem',content:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'}
-          ],
+            // to store the messages received or sent
+            ],
           messageText:"",
           currentParticipants:[],
             roomParticipants:[],
