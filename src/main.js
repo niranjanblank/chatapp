@@ -11,7 +11,7 @@ Vue.use(VueChatScroll)
 Vue.config.productionTip = false
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: io("http://localhost:3000/",{
+  connection: io("http://192.168.0.12:3000/",{
     withCredentials: false
   })
 }))

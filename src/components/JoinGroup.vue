@@ -26,7 +26,7 @@ export default {
     data(){
         return {
             inputRules: {
-                nameField : [inputLength => inputLength.length >=4 || 'Minimum length is 3 characters']
+                nameField : [inputLength => inputLength.length >=4 || 'Minimum length is 4 characters']
             },
             userName: "",
             roomId:"",
@@ -48,7 +48,7 @@ export default {
     methods : {
         enterGroup(){
             if(this.$refs.form.validate()){
-                console.log(this.userName, this.roomId)
+                // console.log(this.userName, this.roomId)
                 this.$router.push({name:'GroupChat',params: {currentUser: this.userName, roomId: this.roomId}}) // pushing this prop to GroupChat component using router
                 // let username=this.username
                 // let room = this.roomId

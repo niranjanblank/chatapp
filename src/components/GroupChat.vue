@@ -38,7 +38,7 @@
             outlined
             rounded
             label="Enter text"
-            append-icon="mdi-map-marker"
+            append-icon="mdi-send" @click:append="sendData"
           ></v-text-field>
             </v-form>
         </v-main>
@@ -86,7 +86,7 @@ export default {
           // this.messages.push(data)
           this.$refs.form.reset()
     
-          console.log(data)
+          // console.log(data)
           // console.log(`Time: ${moment().format('LT')}`)
           //send message to server
           this.$socket.emit('chatMessage',data)
@@ -101,11 +101,11 @@ export default {
       message: function(data) {
         // console.log(data) message data containing username and message
         this.messages.push(data)
-        console.log(`${data} message data`)
+        // console.log(`${data} message data`)
         // console.log(messages)
       },
       updateConnectedUsers: function(data){
-        console.log(data)
+        // console.log(data)
          this.currentParticipants = data
          this.roomParticipants = this.currentParticipants.filter((element)=>{
            return element.roomId == this.roomId         })
@@ -113,14 +113,14 @@ export default {
       },
       newUser: function(data_newUser){
         //notify other user that new user has joined
-        console.log(data_newUser)
+        // console.log(data_newUser)
         this.snackbar= true
         this.snackbarText=`${data_newUser} has joined `
       },
       welcomeNewUser: function(data){
         //welcome new user
         
-        console.log(`welcome ${data.user}`)
+        // console.log(`welcome ${data.user}`)
         this.snackbar= true
         this.snackbarText=`Welcome ${data.user} `
       },

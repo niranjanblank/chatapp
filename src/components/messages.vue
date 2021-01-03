@@ -14,13 +14,6 @@ export default{
     name:'messages',
     props: ['message','currentUser'],
     methods: {
-        checkUsername(username){
-            if(this.currentUser=== username)
-            {
-                return true
-            }
-            return false
-      },
          getShortName(name){
             let splitname=name.split(" ")
             let shortName=""

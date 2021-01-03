@@ -43,7 +43,7 @@ io.on('connection', socket=>{
     socket.on('chatMessage',(msgData)=>{
         //send the message data to everyone conneced to server i.e. all clients
         io.to(msgData.roomId).emit('message',msgData)
-        console.log(msgData)
+        // console.log(msgData)
     })
 
     //listen for connected users
@@ -72,7 +72,7 @@ io.on('connection', socket=>{
     }
     })
 })
-http.listen(3000, ()=>{
+http.listen(3000,'192.168.0.12', ()=>{
    console.log("Listening on port 3000")
       
 })
